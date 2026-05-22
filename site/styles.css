@@ -175,42 +175,16 @@ a { color: inherit; }
 .footer p { font-size: 13px; }
 .footer .small { font-size: 11px; opacity: .7; margin-top: 6px; }
 
-/* Booking form */
-.booking-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.booking-form label {
-  display: flex;
-  flex-direction: column;
+/* Store HPB link */
+.store-link {
+  display: inline-block;
+  margin-top: 12px;
   font-size: 13px;
-  color: var(--greige);
-  gap: 6px;
+  color: var(--terra);
+  text-decoration: none;
+  font-weight: 600;
 }
-.booking-form input,
-.booking-form select,
-.booking-form textarea {
-  font-family: inherit;
-  font-size: 15px;
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--brown);
-  background: #fff;
-}
-.booking-form .btn { margin-top: 8px; }
-
-.booking-done {
-  text-align: center;
-  background: var(--ivory);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 36px 24px;
-}
-.booking-done h3 { font-size: 22px; color: var(--terra); margin-bottom: 12px; }
-.booking-done .small { font-size: 12px; color: var(--greige); margin: 8px 0 16px; }
-.small { font-size: 12px; }
+.store-link:hover { text-decoration: underline; }
 
 @media (max-width: 640px) {
   .hero h1 { font-size: 30px; }
