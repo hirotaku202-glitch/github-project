@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GIL 店舗管理システム</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">GIL</span>
+      <span class="sub">店舗管理システム</span>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab is-active" data-view="dashboard">ダッシュボード</button>
+      <button class="tab" data-view="stores">拠点</button>
+      <button class="tab" data-view="brands">ブランド</button>
+      <button class="tab" data-view="bookings">予約</button>
+      <button class="tab" data-view="staff">スタッフ</button>
+      <button class="tab" data-view="sales">売上</button>
+    </nav>
+    <button class="reset" id="resetBtn" title="初期データに戻す">データ初期化</button>
+  </header>
+
+  <main>
+    <!-- ダッシュボード -->
+    <section class="view is-active" id="view-dashboard">
+      <h1>ダッシュボード</h1>
+      <p class="muted" id="dash-period"></p>
+      <div class="kpi-grid" id="kpiGrid"></div>
+      <div class="panel-grid">
+        <div class="panel">
+          <h2>ブランド別 当月売上</h2>
+          <div class="bars" id="brandBars"></div>
+        </div>
+        <div class="panel">
+          <h2>拠点別 当月売上</h2>
+          <div class="bars" id="storeBars"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>成長方針サマリー</h2>
+        <div class="bars" id="growthSummary"></div>
+      </div>
+    </section>
+
+    <!-- 拠点 -->
+    <section class="view" id="view-stores">
+      <h1>拠点</h1>
+      <p class="muted">株式会社GIL 4拠点。各拠点は複数ブランドの複合店。</p>
+      <div class="card-grid" id="storeCards"></div>
+    </section>
+
+    <!-- ブランド -->
+    <section class="view" id="view-brands">
+      <h1>ブランド</h1>
+      <p class="muted">買収後も5ブランドすべてを維持。ブランドごとに成長方針を分ける。</p>
+      <div class="card-grid" id="brandCards"></div>
+    </section>
+
+    <!-- 予約 -->
+    <section class="view" id="view-bookings">
+      <h1>予約</h1>
+      <p class="muted">予約サイトからの申込もここに集約される。</p>
+      <form class="form" id="bookingForm">
+        <div class="row">
+          <label>日時<input type="datetime-local" name="datetime" required /></label>
+          <label>拠点<select name="store" id="bk-store" required></select></label>
+          <label>ブランド<select name="brand" id="bk-brand" required></select></label>
+        </div>
+        <div class="row">
+          <label>メニュー<input type="text" name="menu" placeholder="例: 眉スタイリング" required /></label>
+          <label>お名前<input type="text" name="name" required /></label>
+          <label>電話<input type="tel" name="phone" placeholder="090-..." /></label>
+        </div>
+        <button type="submit">予約を追加</button>
+      </form>
+      <table class="data">
+        <thead>
+          <tr><th>日時</th><th>拠点</th><th>ブランド</th><th>メニュー</th><th>お客様</th><th>状態</th><th></th></tr>
+        </thead>
+        <tbody id="bookingRows"></tbody>
+      </table>
+    </section>
+
+    <!-- スタッフ -->
+    <section class="view" id="view-staff">
+      <h1>スタッフ</h1>
+      <form class="form" id="staffForm">
+        <div class="row">
+          <label>氏名<input type="text" name="name" required /></label>
+          <label>拠点<select name="store" id="st-store" required></select></label>
+          <label>ブランド<select name="brand" id="st-brand" required></select></label>
+          <label>役割<select name="role">
+            <option>店長</option><option>スタイリスト</option>
+            <option>アイリスト</option><option>トレーナー</option>
+            <option>エステティシャン</option><option>受付</option>
+          </select></label>
+        </div>
+        <button type="submit">スタッフを追加</button>
+      </form>
+      <table class="data">
+        <thead><tr><th>氏名</th><th>拠点</th><th>ブランド</th><th>役割</th><th></th></tr></thead>
+        <tbody id="staffRows"></tbody>
+      </table>
+    </section>
+
+    <!-- 売上 -->
+    <section class="view" id="view-sales">
+      <h1>売上</h1>
+      <p class="muted">拠点×ブランド別に月次売上を記録。再生の進捗を可視化する。</p>
+      <form class="form" id="salesForm">
+        <div class="row">
+          <label>年月<input type="month" name="ym" required /></label>
+          <label>拠点<select name="store" id="sl-store" required></select></label>
+          <label>ブランド<select name="brand" id="sl-brand" required></select></label>
+          <label>売上(円)<input type="number" name="revenue" min="0" required /></label>
+          <label>来店数<input type="number" name="customers" min="0" required /></label>
+        </div>
+        <button type="submit">売上を記録</button>
+      </form>
+      <table class="data">
+        <thead><tr><th>年月</th><th>拠点</th><th>ブランド</th><th>売上</th><th>来店数</th><th>客単価</th><th></th></tr></thead>
+        <tbody id="salesRows"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
