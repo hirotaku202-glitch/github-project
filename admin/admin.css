@@ -124,6 +124,7 @@ h2 { font-size: 15px; margin-bottom: 12px; color: var(--brown); }
 }
 .bar-fill.brow { background: #3E2C23; }
 .bar-fill.lash { background: #C98B95; }
+.bar-fill.limbrow { background: #A87C82; }
 .bar-fill.boss { background: #45506B; }
 .bar-fill.gym  { background: #C9A227; }
 .bar-fill.bright { background: #C8A98F; }

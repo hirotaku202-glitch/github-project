@@ -12,21 +12,23 @@ const KEYS = {
 /* ---------- 初期データ（株式会社GIL の実構成） ---------- */
 const SEED = {
   brands: [
-    { id: 'brow', name: '8BROW', type: '眉毛サロン', cls: 'brow',
-      policy: '出店継続（グループ主力）。Lim eyelash併設を基本形に中京圏で拡大。' },
     { id: 'lash', name: 'Lim eyelash', type: 'まつげサロン', cls: 'lash',
-      policy: '多店舗化の最優先ブランド。標準店モデルを確立し中京圏で展開。' },
+      policy: '多店舗化の主力。Lim browと併設した「Lim複合店」を新規出店の標準形に。' },
+    { id: 'limbrow', name: 'Lim brow', type: '眉毛サロン（新ブランド）', cls: 'limbrow',
+      policy: 'Lim eyelash併設の眉毛サロン。新規出店と8BROWからの転換で眉毛ブランドをLim browへ一本化。' },
+    { id: 'brow', name: '8BROW', type: '眉毛サロン（Lim browへ移行中）', cls: 'brow',
+      policy: '既存3拠点を改装・契約更新のタイミングで順次Lim browへリブランド統合。' },
     { id: 'boss', name: 'メンズ脱毛BOSS', type: 'メンズ脱毛（FC加盟）', cls: 'boss',
-      policy: 'FC加盟。単独出店せず、新規出店時に8BROWへ併設する形でのみ展開。' },
+      policy: 'FC加盟。単独出店せず、新規出店時にLim複合店へ併設する形でのみ展開。' },
     { id: 'gym', name: 'GOAT TrainingGYM', type: 'トレーニングジム', cls: 'gym',
       policy: '横展開しない。名古屋複合店の差別化要素として維持・最適化。' },
     { id: 'bright', name: 'Beauty Bright', type: '美容（エステ系）', cls: 'bright',
-      policy: '八日市複合店の一業態として維持。8BROWと併売。' },
+      policy: '八日市複合店の一業態として維持。眉毛サロン（8BROW→Lim brow）と併売。' },
   ],
   stores: [
     { id: 's-nagoya', name: '名古屋店', area: '愛知', beds: 7, brandIds: ['boss', 'brow', 'gym'] },
     { id: 's-yokaichi', name: '八日市店', area: '滋賀・東近江', beds: 5, brandIds: ['bright', 'brow'] },
-    { id: 's-kuwana', name: '桑名店', area: '三重', beds: 4, brandIds: ['lash'] },
+    { id: 's-kuwana', name: '桑名店', area: '三重', beds: 6, brandIds: ['lash', 'limbrow'] },
     { id: 's-toyota', name: '豊田店', area: '愛知', beds: 3, brandIds: ['brow'] },
   ],
   staff: [
@@ -38,6 +40,7 @@ const SEED = {
     { id: 'st6', name: '渡辺 narumi', storeId: 's-kuwana', brandId: 'lash', role: '店長' },
     { id: 'st7', name: '山本 桃花', storeId: 's-kuwana', brandId: 'lash', role: 'アイリスト' },
     { id: 'st8', name: '中村 葵', storeId: 's-toyota', brandId: 'brow', role: '店長' },
+    { id: 'st9', name: '森 ひかり', storeId: 's-kuwana', brandId: 'limbrow', role: 'スタイリスト' },
   ],
   sales: buildSeedSales(),
   bookings: [
@@ -61,6 +64,7 @@ function buildSeedSales() {
     ['s-yokaichi', 'bright', 1100000, 8500],
     ['s-yokaichi', 'brow', 1500000, 5500],
     ['s-kuwana', 'lash', 2150000, 6700],
+    ['s-kuwana', 'limbrow', 850000, 5500],
     ['s-toyota', 'brow', 1700000, 5500],
   ];
   const months = lastMonths(3);
@@ -187,9 +191,10 @@ function renderDashboard() {
 
   // 成長方針サマリー（拠点数 / 目標）
   const growth = [
-    { label: 'Lim eyelash（多店舗化）', cls: 'lash', cur: 1, goal: 5 },
-    { label: '8BROW（出店継続）', cls: 'brow', cur: 3, goal: 6 },
-    { label: 'メンズ脱毛BOSS（8BROW併設）', cls: 'boss', cur: 1, goal: 3 },
+    { label: 'Lim複合店（eyelash＋brow）', cls: 'lash', cur: 1, goal: 5 },
+    { label: 'Lim brow（眉毛・新ブランド）', cls: 'limbrow', cur: 1, goal: 8 },
+    { label: '8BROW（順次Lim browへ統合）', cls: 'brow', cur: 3, goal: 0 },
+    { label: 'メンズ脱毛BOSS（Lim複合店併設）', cls: 'boss', cur: 1, goal: 3 },
     { label: 'GOAT（名古屋のみ維持）', cls: 'gym', cur: 1, goal: 1 },
     { label: 'Beauty Bright（八日市で維持）', cls: 'bright', cur: 1, goal: 1 },
   ];
