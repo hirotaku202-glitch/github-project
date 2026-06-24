@@ -1,0 +1,15 @@
+# Google API の認証情報・トークン（機密。絶対にコミットしない）
+credentials.json
+token.json
+
+# アップロード対象の Excel
+*.xlsx
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
